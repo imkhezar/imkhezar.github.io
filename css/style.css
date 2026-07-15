@@ -679,13 +679,33 @@ ul{ list-style: none; margin:0; padding:0; }
 /* =========================================================
    PORTFOLIO GRID (placeholder visuals)
 ========================================================= */
-.portfolio-grid{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+.portfolio-scroll{
+  overflow-x: auto;
+  overflow-y: hidden;
   margin-top: 2.25rem;
+  padding-bottom: 0.5rem;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
 }
-.portfolio-item{ margin: 0; }
+.portfolio-grid{
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+}
+.portfolio-item{
+  margin: 0;
+  flex: 0 0 260px;
+  scroll-snap-align: start;
+}
+
+/* subtle scrollbar styling, falls back gracefully where unsupported */
+.portfolio-scroll::-webkit-scrollbar{ height: 8px; }
+.portfolio-scroll::-webkit-scrollbar-track{ background: transparent; }
+.portfolio-scroll::-webkit-scrollbar-thumb{
+  background: var(--border);
+  border-radius: 999px;
+}
+.portfolio-scroll{ scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
 .portfolio-item__visual{
   border-radius: var(--radius);
   overflow: hidden;
@@ -752,7 +772,6 @@ ul{ list-style: none; margin:0; padding:0; }
 
 @media (max-width: 860px){
   .about-grid{ grid-template-columns: 1fr; }
-  .portfolio-grid{ grid-template-columns: 1fr; }
   .quick-cards{ grid-template-columns: 1fr; }
 }
 
