@@ -1,0 +1,49 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgVid" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E7E9E3"/>
+      <stop offset="1" stop-color="#D6DAD1"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="600" rx="20" fill="url(#bgVid)"/>
+
+  <g stroke="#BFC4B8" stroke-width="1" opacity="0.4">
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="450" x2="800" y2="450"/>
+    <line x1="200" y1="0" x2="200" y2="600"/>
+    <line x1="400" y1="0" x2="400" y2="600"/>
+    <line x1="600" y1="0" x2="600" y2="600"/>
+  </g>
+
+  <!-- monitor -->
+  <rect x="160" y="120" width="480" height="300" rx="14" fill="#FFFFFF" stroke="#B7BCAF" stroke-width="2"/>
+  <rect x="180" y="140" width="440" height="260" rx="6" fill="#12261E"/>
+
+  <!-- monitor stand -->
+  <rect x="378" y="420" width="44" height="30" fill="#B7BCAF"/>
+  <rect x="330" y="450" width="140" height="14" rx="7" fill="#B7BCAF"/>
+
+  <!-- play triangle -->
+  <circle cx="400" cy="270" r="58" fill="#FFFFFF" opacity="0.95"/>
+  <path d="M382 240 L382 300 L432 270 Z" fill="#FF6B4A"/>
+
+  <!-- waveform bars along the bottom of the screen -->
+  <g fill="#1F6F54">
+    <rect x="210" y="345" width="10" height="24" rx="4"/>
+    <rect x="230" y="330" width="10" height="39" rx="4"/>
+    <rect x="250" y="352" width="10" height="17" rx="4"/>
+    <rect x="270" y="320" width="10" height="49" rx="4"/>
+    <rect x="290" y="340" width="10" height="29" rx="4"/>
+    <rect x="500" y="336" width="10" height="33" rx="4"/>
+    <rect x="520" y="322" width="10" height="47" rx="4"/>
+    <rect x="540" y="348" width="10" height="21" rx="4"/>
+    <rect x="560" y="330" width="10" height="39" rx="4"/>
+    <rect x="580" y="344" width="10" height="25" rx="4"/>
+  </g>
+
+  <text x="400" y="530" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="600" fill="#12261E">
+    Web Design Presentations
+  </text>
+</svg>
