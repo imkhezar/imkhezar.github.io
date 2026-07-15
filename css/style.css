@@ -105,6 +105,22 @@ ul{ list-style: none; margin:0; padding:0; }
 
 .section__title{ font-size: clamp(1.6rem, 3.2vw, 2.1rem); }
 .section__sub{ max-width: 56ch; }
+.section__cta{ margin-top: 2rem; }
+
+.quick-services{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.75rem;
+}
+.quick-services li{
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  border: 1px dashed var(--border);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+}
 
 /* =========================================================
    HEADER
@@ -562,6 +578,122 @@ ul{ list-style: none; margin:0; padding:0; }
   .hero{ padding-top: 2.5rem; }
   .hero__cta{ flex-direction: column; align-items: stretch; }
   .hero__cta .btn{ text-align: center; }
+}
+
+/* =========================================================
+   SIMPLE HERO (subpages like services.html)
+========================================================= */
+.hero--simple{ padding: clamp(3rem, 8vw, 5rem) 0 clamp(2rem, 5vw, 3rem); }
+.hero__inner--stack{
+  display: block;
+  max-width: 70ch;
+}
+.header__nav a.is-current{ color: var(--ink); font-weight: 600; }
+
+/* =========================================================
+   GIG CARDS (services.html)
+========================================================= */
+.gig-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+.gig{
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.gig__head{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.gig__category{
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--brand);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.25rem 0.65rem;
+}
+.gig__price{
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--brand);
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  white-space: nowrap;
+}
+.gig__quote{
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--coral);
+  border-radius: 999px;
+  padding: 0.3rem 0.85rem;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+.gig__quote:hover{ background: var(--coral-dark); text-decoration: none; }
+.gig__title{ font-size: 1.1rem; margin-bottom: 0.4rem; }
+.gig__desc{ font-size: 0.9rem; margin-bottom: 0.9rem; }
+.gig__meta{
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-dim);
+  margin-bottom: 0.75rem;
+}
+.gig__details{
+  border-top: 1px dashed var(--border);
+  padding-top: 0.9rem;
+  margin-bottom: 0.9rem;
+}
+.gig__details ul{ display: flex; flex-direction: column; gap: 0.45rem; }
+.gig__details li{
+  font-size: 0.87rem;
+  color: var(--ink-muted);
+  padding-left: 1.1rem;
+  position: relative;
+}
+.gig__details li::before{
+  content: "";
+  position: absolute;
+  left: 0; top: 0.5em;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+.gig__toggle{
+  margin-top: auto;
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: var(--brand);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+.gig__toggle:hover{ text-decoration: underline; }
+
+@media (max-width: 960px){
+  .gig-grid{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 720px){
+  .gig-grid{ grid-template-columns: 1fr; }
 }
 
 /* =========================================================

@@ -87,4 +87,26 @@
       observer.observe(section);
     });
   }
+  /* -----------------------------------------------------
+     Gig card "Show more / Show less" toggles (services.html)
+  ----------------------------------------------------- */
+  document.querySelectorAll('.gig__toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var gig = btn.closest('.gig');
+      var details = gig ? gig.querySelector('.gig__details') : null;
+      if (!details) return;
+
+      var isHidden = details.hasAttribute('hidden');
+      if (isHidden) {
+        details.removeAttribute('hidden');
+        btn.textContent = 'Show less';
+        btn.setAttribute('aria-expanded', 'true');
+      } else {
+        details.setAttribute('hidden', '');
+        btn.textContent = 'Show more';
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
 })();
