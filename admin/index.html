@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin — Muhammad Khezar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- ===== LOGIN VIEW ===== -->
+<section id="loginView" class="admin-login">
+  <form id="loginForm" class="admin-login__card">
+    <p class="eyebrow">admin</p>
+    <h1 class="admin-login__title">Log in</h1>
+    <div class="form__row">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required autocomplete="current-password">
+    </div>
+    <button type="submit" class="btn btn--primary">Log in</button>
+    <p class="admin-login__error" id="loginError" role="alert"></p>
+  </form>
+</section>
+
+<!-- ===== DASHBOARD VIEW ===== -->
+<section id="dashboardView" class="admin-dashboard" hidden>
+
+  <header class="admin-header">
+    <div class="admin-header__inner">
+      <a href="../index.html" class="header__brand">Muhammad Khezar</a>
+      <span class="admin-header__label">admin dashboard</span>
+      <button id="logoutBtn" class="btn btn--ghost btn--sm">Log out</button>
+    </div>
+  </header>
+
+  <main class="admin-main">
+
+    <nav class="admin-tabs" role="tablist">
+      <button class="admin-tab is-active" data-tab="services" role="tab" aria-selected="true">Services</button>
+      <button class="admin-tab" data-tab="portfolio" role="tab" aria-selected="false">Portfolio</button>
+    </nav>
+
+    <!-- ===== SERVICES PANEL ===== -->
+    <div class="admin-panel" id="panel-services">
+
+      <div class="admin-panel__list" id="servicesList" aria-live="polite">
+        <!-- rows injected by admin.js -->
+      </div>
+
+      <form class="admin-form" id="serviceForm">
+        <h2 class="admin-form__title" id="serviceFormTitle">Add a service</h2>
+        <input type="hidden" id="serviceId" name="id">
+
+        <div class="form__grid">
+          <div class="form__row">
+            <label for="serviceCategory">Category</label>
+            <input type="text" id="serviceCategory" name="category" placeholder="Development" required>
+          </div>
+          <div class="form__row">
+            <label for="serviceDelivery">Delivery time</label>
+            <input type="text" id="serviceDelivery" name="delivery_time" placeholder="1-day delivery">
+          </div>
+        </div>
+
+        <div class="form__row">
+          <label for="serviceTitle">Title</label>
+          <input type="text" id="serviceTitle" name="title" required>
+        </div>
+
+        <div class="form__row">
+          <label for="serviceDesc">Description</label>
+          <textarea id="serviceDesc" name="description" rows="2" required></textarea>
+        </div>
+
+        <div class="form__grid">
+          <div class="form__row">
+            <label for="servicePriceType">Price</label>
+            <select id="servicePriceType" name="price_type">
+              <option value="quote">Get quote</option>
+              <option value="fixed">Fixed starting price</option>
+            </select>
+          </div>
+          <div class="form__row" id="priceLabelRow" hidden>
+            <label for="servicePriceLabel">Price label</label>
+            <input type="text" id="servicePriceLabel" name="price_label" placeholder="From $30">
+          </div>
+        </div>
+
+        <div class="form__row">
+          <label for="serviceDetails">What's included (one per line)</label>
+          <textarea id="serviceDetails" name="details" rows="4" placeholder="WordPress core installation&#10;Theme installation & configuration"></textarea>
+        </div>
+
+        <div class="form__row form__row--inline">
+          <label><input type="checkbox" id="serviceSortOrder-published" name="is_published" checked> Published (visible on site)</label>
+        </div>
+
+        <div class="admin-form__actions">
+          <button type="submit" class="btn btn--primary">Save service</button>
+          <button type="button" class="btn btn--ghost" id="serviceCancelBtn" hidden>Cancel edit</button>
+        </div>
+        <p class="admin-form__status" id="serviceStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <!-- ===== PORTFOLIO PANEL ===== -->
+    <div class="admin-panel" id="panel-portfolio" hidden>
+
+      <div class="admin-panel__list" id="portfolioList" aria-live="polite">
+        <!-- rows injected by admin.js -->
+      </div>
+
+      <form class="admin-form" id="portfolioForm">
+        <h2 class="admin-form__title" id="portfolioFormTitle">Add a portfolio item</h2>
+        <input type="hidden" id="portfolioId" name="id">
+
+        <div class="form__row">
+          <label for="portfolioTitle">Title</label>
+          <input type="text" id="portfolioTitle" name="title" required>
+        </div>
+        <div class="form__row">
+          <label for="portfolioCaption">Caption</label>
+          <input type="text" id="portfolioCaption" name="caption" required>
+        </div>
+        <div class="form__row">
+          <label for="portfolioImage">Image path or URL</label>
+          <input type="text" id="portfolioImage" name="image_url" placeholder="images/thumb-example.svg" required>
+        </div>
+        <div class="form__row form__row--inline">
+          <label><input type="checkbox" id="portfolioPublished" name="is_published" checked> Published (visible on site)</label>
+        </div>
+
+        <div class="admin-form__actions">
+          <button type="submit" class="btn btn--primary">Save item</button>
+          <button type="button" class="btn btn--ghost" id="portfolioCancelBtn" hidden>Cancel edit</button>
+        </div>
+        <p class="admin-form__status" id="portfolioStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+  </main>
+</section>
+
+<script src="js/admin.js"></script>
+</body>
+</html>
