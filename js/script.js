@@ -89,24 +89,111 @@
   }
   /* -----------------------------------------------------
      Gig card "Show more / Show less" toggles (services.html)
+     Uses event delegation since cards are loaded from the API
+     after the page renders — a direct querySelectorAll binding
+     wouldn't reach cards that don't exist yet at load time.
   ----------------------------------------------------- */
-  document.querySelectorAll('.gig__toggle').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var gig = btn.closest('.gig');
-      var details = gig ? gig.querySelector('.gig__details') : null;
-      if (!details) return;
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.gig__toggle');
+    if (!btn) return;
 
-      var isHidden = details.hasAttribute('hidden');
-      if (isHidden) {
-        details.removeAttribute('hidden');
-        btn.textContent = 'Show less';
-        btn.setAttribute('aria-expanded', 'true');
-      } else {
-        details.setAttribute('hidden', '');
-        btn.textContent = 'Show more';
-        btn.setAttribute('aria-expanded', 'false');
-      }
-    });
+    var gig = btn.closest('.gig');
+    var details = gig ? gig.querySelector('.gig__details') : null;
+    if (!details) return;
+
+    var isHidden = details.hasAttribute('hidden');
+    if (isHidden) {
+      details.removeAttribute('hidden');
+      btn.textContent = 'Show less';
+      btn.setAttribute('aria-expanded', 'true');
+    } else {
+      details.setAttribute('hidden', '');
+      btn.textContent = 'Show more';
+      btn.setAttribute('aria-expanded', 'false');
+    }
   });
+
+  /* -----------------------------------------------------
+     Load services from the API (services.html)
+  ----------------------------------------------------- */
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str == null ? '' : String(str);
+    return div.innerHTML;
+  }
+
+  function renderGigCard(item) {
+    var priceHtml = item.price_type === 'fixed'
+      ? '<span class="gig__price">' + escapeHtml(item.price_label || '') + '</span>'
+      : '<a href="index.html#contact" class="gig__quote">Get quote</a>';
+
+    var detailsHtml = (item.details || [])
+      .map(function (d) { return '<li>' + escapeHtml(d) + '</li>'; })
+      .join('');
+
+    return (
+      '<article class="gig">' +
+        '<div class="gig__head">' +
+          '<span class="gig__category">' + escapeHtml(item.category) + '</span>' +
+          priceHtml +
+        '</div>' +
+        '<h3 class="gig__title">' + escapeHtml(item.title) + '</h3>' +
+        '<p class="gig__desc">' + escapeHtml(item.description) + '</p>' +
+        (item.delivery_time
+          ? '<div class="gig__meta"><span>⏱ ' + escapeHtml(item.delivery_time) + '</span></div>'
+          : '') +
+        '<div class="gig__details" hidden><ul>' + detailsHtml + '</ul></div>' +
+        '<button class="gig__toggle" type="button" aria-expanded="false">Show more</button>' +
+      '</article>'
+    );
+  }
+
+  var gigGrid = document.getElementById('gigGrid');
+  if (gigGrid) {
+    fetch('/api/services')
+      .then(function (r) { return r.json(); })
+      .then(function (items) {
+        if (!items.length) {
+          gigGrid.innerHTML = '<p class="section__sub">No services published yet.</p>';
+          return;
+        }
+        gigGrid.innerHTML = items.map(renderGigCard).join('');
+        gigGrid.setAttribute('data-state', 'loaded');
+      })
+      .catch(function () {
+        gigGrid.innerHTML = '<p class="section__sub">Unable to load services right now — please try again shortly.</p>';
+      });
+  }
+
+  /* -----------------------------------------------------
+     Load portfolio items from the API (index.html)
+  ----------------------------------------------------- */
+  function renderPortfolioItem(item) {
+    return (
+      '<figure class="portfolio-item">' +
+        '<div class="portfolio-item__visual">' +
+          '<img src="' + escapeHtml(item.image_url) + '" alt="' + escapeHtml(item.title) + ' thumbnail" loading="lazy">' +
+        '</div>' +
+        '<figcaption>' + escapeHtml(item.caption) + '</figcaption>' +
+      '</figure>'
+    );
+  }
+
+  var portfolioGrid = document.getElementById('portfolioGrid');
+  if (portfolioGrid) {
+    fetch('/api/portfolio')
+      .then(function (r) { return r.json(); })
+      .then(function (items) {
+        if (!items.length) {
+          portfolioGrid.innerHTML = '<p class="section__sub">No portfolio items published yet.</p>';
+          return;
+        }
+        portfolioGrid.innerHTML = items.map(renderPortfolioItem).join('');
+        portfolioGrid.setAttribute('data-state', 'loaded');
+      })
+      .catch(function () {
+        portfolioGrid.innerHTML = '<p class="section__sub">Unable to load portfolio right now — please try again shortly.</p>';
+      });
+  }
 
 })();

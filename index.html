@@ -204,34 +204,11 @@
     <div class="section__inner">
       <p class="eyebrow">portfolio</p>
       <h2 class="section__title">A sample of the work</h2>
-      <p class="section__sub">Generic thumbnails below — swap these for real project screenshots any time.</p>
+      <p class="section__sub">Loaded from the admin dashboard — swap thumbnails for real project screenshots any time.</p>
 
       <div class="portfolio-scroll">
-        <div class="portfolio-grid">
-          <figure class="portfolio-item">
-            <div class="portfolio-item__visual">
-              <img src="images/thumb-ads-motion.svg" alt="Ads and motion design placeholder thumbnail" loading="lazy">
-            </div>
-            <figcaption>Motion design, Facebook &amp; Instagram ad posts</figcaption>
-          </figure>
-          <figure class="portfolio-item">
-            <div class="portfolio-item__visual">
-              <img src="images/thumb-wordpress.svg" alt="WordPress builds placeholder thumbnail" loading="lazy">
-            </div>
-            <figcaption>WordPress / Bootstrap / HTML, CSS, JS builds</figcaption>
-          </figure>
-          <figure class="portfolio-item">
-            <div class="portfolio-item__visual">
-              <img src="images/thumb-webdesign.svg" alt="Web design video presentations placeholder thumbnail" loading="lazy">
-            </div>
-            <figcaption>Web design video presentations</figcaption>
-          </figure>
-          <!--
-            To add another category: copy one <figure class="portfolio-item">...</figure>
-            block above, change the image src, alt text, and caption. It will
-            automatically join the horizontal scroll — no other markup or CSS
-            changes needed.
-          -->
+        <div class="portfolio-grid" id="portfolioGrid" data-state="loading">
+          <p class="section__sub">Loading portfolio…</p>
         </div>
       </div>
     </div>
