@@ -593,11 +593,26 @@ ul{ list-style: none; margin:0; padding:0; }
 /* =========================================================
    GIG CARDS (services.html)
 ========================================================= */
-.gig-grid{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+.gig-scroll{
+  overflow-x: auto;
+  overflow-y: hidden;
   margin-top: 1rem;
+  padding-bottom: 0.5rem;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+.gig-scroll::-webkit-scrollbar{ height: 8px; }
+.gig-scroll::-webkit-scrollbar-track{ background: transparent; }
+.gig-scroll::-webkit-scrollbar-thumb{
+  background: var(--border);
+  border-radius: 999px;
+}
+.gig-scroll{ scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+
+.gig-grid{
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
 }
 .gig{
   background: var(--bg-panel);
@@ -606,6 +621,8 @@ ul{ list-style: none; margin:0; padding:0; }
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
+  flex: 0 0 300px;
+  scroll-snap-align: start;
 }
 .gig__head{
   display: flex;
@@ -688,13 +705,6 @@ ul{ list-style: none; margin:0; padding:0; }
   padding: 0;
 }
 .gig__toggle:hover{ text-decoration: underline; }
-
-@media (max-width: 960px){
-  .gig-grid{ grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 720px){
-  .gig-grid{ grid-template-columns: 1fr; }
-}
 
 /* =========================================================
    SNAPSHOT: stat bar + split stats (real-data version)
